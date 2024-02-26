@@ -65,7 +65,7 @@ Roadmap
 Contribute
 ----------
 
-- Found a bug or have a feature request? open and issue here: https://github.com/Ola-Daniel/qrcodebakery/issues 
+- Found a bug or have a feature request? open an issue here: https://github.com/Ola-Daniel/qrcodebakery/issues 
 - Want to contribute code? Fork the repository and submit a pull request: https://github.com/Ola-Daniel/qrcodebakery 
 
 Support
