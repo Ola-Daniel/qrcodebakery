@@ -16,7 +16,7 @@ What can a QR Code be used for?
 
 
 
-How does the QR Code Generator work?
+How can i use this tool to generate QR Codes?
 -------------------------------------------
 
 
