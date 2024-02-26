@@ -41,7 +41,11 @@ How can i use this tool to generate QR Codes?
 Features
 --------
 
--
+- Easy-to-use interface
+- Customizable QR codes
+- Multiple data types supported
+- Fast and reliable generation
+
 
 
 
@@ -61,14 +65,13 @@ Roadmap
 Contribute
 ----------
 
-- Issue Tracker: https://github.com/Ola-Daniel/qrcodebakery/issues 
-- Source Code: https://github.com/Ola-Daniel/qrcodebakery 
+- Found a bug or have a feature request? open and issue here: https://github.com/Ola-Daniel/qrcodebakery/issues 
+- Want to contribute code? Fork the repository and submit a pull request: https://github.com/Ola-Daniel/qrcodebakery 
 
 Support
 -------
 
-If you are having issues, please let me know.
-I can be reached on Twitter @ https://twitter.com/horla_dan 
+If you encouter any issues or need assistance, feel free to reach out to me on X @ https://twitter.com/horla_dan 
 
 Disclaimer
 ----------
