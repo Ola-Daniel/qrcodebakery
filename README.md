@@ -76,7 +76,7 @@ If you encouter any issues or need assistance, feel free to reach out to me on X
 Disclaimer
 ----------
 
-
+This project is provided as-is, and the developers are not responsible for any misuse or unintended consequences of generated QR codes.
 
 License
 -------
