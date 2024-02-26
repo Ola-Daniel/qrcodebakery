@@ -1,6 +1,6 @@
 qrcodebakery.com
 ========
-QR Code Bakery is a powerful tool for generating QR codes quickly and easily. Whether you neeed to share URLs, contact information, WIFI credentials, or any other data, our service has you covered.
+QR Code Bakery is a powerful tool for generating QR codes quickly and easily. Whether you need to share URLs, contact information, WIFI credentials, or any other data, our service has got you covered.
 
 
 
