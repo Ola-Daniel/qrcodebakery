@@ -53,6 +53,10 @@ func (app *application) signup(w http.ResponseWriter, r *http.Request) {
 
 }
 
+func (app *application) generate(w http.ResponseWriter, r *http.Request) {
+
+}
+
 
 
 
