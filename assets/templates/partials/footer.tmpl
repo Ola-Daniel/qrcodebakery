@@ -1,7 +1,14 @@
 {{define "partial:footer"}}
 <footer>
-    &copy; {{now | formatTime "2006"}}
     <br>
-    Version: {{.Version}}
+    <ul style="text-align: right;">
+    <a href="/privacy-policy">Privacy Policy</a>
+    <br>
+    <a href="/tos">Terms of Service</a>
+    <br>
+    <div style="text-align: center;">
+    &copy; {{now | formatTime "2006"}}
+    </div>    
+    
 </footer>
 {{end}}
