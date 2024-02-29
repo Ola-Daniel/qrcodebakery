@@ -21,6 +21,20 @@ func (app *application) routes() http.Handler {
 
 	mux.HandleFunc("/", app.home).Methods("GET")
 
+	mux.HandleFunc("/tos", app.tos).Methods("GET")
+
+	mux.HandleFunc("/privacy-policy", app.privacypolicy).Methods("GET")
+
+	mux.HandleFunc("/disclaimer", app.disclaimer).Methods("GET")
+
+	mux.HandleFunc("/generate", app.generate).Methods("POST")
+
+    mux.HandleFunc("/login", app.login).Methods("GET", "POST")
+
+	mux.HandleFunc("/signup", app.signup).Methods("GET", "POST")
+
+
+
 	protectedRoutes := mux.NewRoute().Subrouter()
 	protectedRoutes.Use(app.requireBasicAuthentication)
 	protectedRoutes.HandleFunc("/basic-auth-protected", app.protected).Methods("GET")
