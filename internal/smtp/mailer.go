@@ -4,8 +4,8 @@ import (
 	"bytes"
 	"time"
 
-	"example.com/assets"
-	"example.com/internal/funcs"
+	"github.com/Ola-Daniel/qrcodebakery/assets"
+	"github.com/Ola-Daniel/qrcodebakery/internal/funcs"
 
 	"github.com/wneessen/go-mail"
 

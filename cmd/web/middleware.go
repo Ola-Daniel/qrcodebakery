@@ -6,7 +6,7 @@ import (
 	"log/slog"
 	"net/http"
 
-	"example.com/internal/response"
+	"github.com/Ola-Daniel/qrcodebakery/internal/response"
 
 	"github.com/tomasen/realip"
 	"golang.org/x/crypto/bcrypt"

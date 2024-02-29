@@ -3,7 +3,7 @@ package main
 import (
 	"net/http"
 
-	"example.com/assets"
+	"github.com/Ola-Daniel/qrcodebakery/assets"
 
 	"github.com/gorilla/mux"
 )

@@ -5,8 +5,8 @@ import (
 	"html/template"
 	"net/http"
 
-	"example.com/assets"
-	"example.com/internal/funcs"
+	"github.com/Ola-Daniel/qrcodebakery/assets"
+	"github.com/Ola-Daniel/qrcodebakery/internal/funcs"
 )
 
 func Page(w http.ResponseWriter, status int, data any, pagePath string) error {

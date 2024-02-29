@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"net/http"
 
-	"example.com/internal/version"
+	"github.com/Ola-Daniel/qrcodebakery/internal/version"
 )
 
 func (app *application) newTemplateData(r *http.Request) map[string]any {

@@ -5,7 +5,7 @@ import (
 	"errors"
 	"time"
 
-	"example.com/assets"
+	"github.com/Ola-Daniel/qrcodebakery/assets"
 
 	"github.com/golang-migrate/migrate/v4"
 	"github.com/golang-migrate/migrate/v4/source/iofs"
