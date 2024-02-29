@@ -47,18 +47,18 @@ test/cover:
 ## build: build the cmd/web application
 .PHONY: build
 build:
-	go build -o=/tmp/bin/web ./cmd/web
+	go build -o /tmp/bin/web.exe ./cmd/web
 	
 ## run: run the cmd/web application
 .PHONY: run
 run: build
-	/tmp/bin/web
+	/tmp/bin/web.exe
 
 ## run/live: run the application with reloading on file changes
 .PHONY: run/live
 run/live:
 	go run github.com/cosmtrek/air@v1.43.0 \
-		--build.cmd "make build" --build.bin "/tmp/bin/web" --build.delay "100" \
+		--build.cmd "make build" --build.bin "/tmp/bin/web" --build.delay "20" \
 		--build.exclude_dir "" \
 		--build.include_ext "go, tpl, tmpl, html, css, scss, js, ts, sql, jpeg, jpg, gif, png, bmp, svg, webp, ico" \
 		--misc.clean_on_exit "true"
