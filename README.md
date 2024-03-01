@@ -18,6 +18,7 @@ QR codes have a wide range of applications, including but not limited to,
 - Sharing contact details (vCards)
 - Providing Wi-Fi login credentials
 - Displaying product information
+- Contactless payments
 - Tracking inventory
 - And much more!
 
