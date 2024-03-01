@@ -1,17 +1,25 @@
 package main
 
 import (
-	"fmt"
+	//"fmt"
 	"net/http"
 
 	"github.com/Ola-Daniel/qrcodebakery/internal/request"
 	"github.com/Ola-Daniel/qrcodebakery/internal/response"
 	"github.com/yeqown/go-qrcode/v2"
 	"github.com/yeqown/go-qrcode/writer/standard"
+	"github.com/google/uuid"
 )
+
+
+var ImageFile string
+
+var ImageFileUploadPath string
 
 func (app *application) home(w http.ResponseWriter, r *http.Request) {
 	data := app.newTemplateData(r)
+
+	data["QRCodeImagePath"] = ImageFileUploadPath
 
 	err := response.Page(w, http.StatusOK, data, "pages/home.tmpl")
 	if err != nil {
@@ -61,6 +69,7 @@ func (app *application) generate(w http.ResponseWriter, r *http.Request) {
 
     type response struct {
 		DataString string `form:"dataString"`
+		QRCodeImagePath string `form:"QRCodeImagePath"`
 	}
     var form response
 
@@ -73,20 +82,35 @@ func (app *application) generate(w http.ResponseWriter, r *http.Request) {
      
 	qrc, err := qrcode.New(form.DataString)
 	if err != nil {
-		fmt.Printf("could not generate QRCode: %v", err) 
+		app.serverError(w, r, err)
 		return
 	}
+
+
+	random := uuid.New().String()
+
+
+	ImageFile = "generated-qrcode-"+random+".jpeg"
+
+	ImageFileUploadPath = "./files/generated/"+ImageFile     
 	
-	wr, err := standard.New("./files/generated/test-qrcode.jpeg") 
+	//ImageFilePath := "./assets"+ImageFile    
+	
+	wr, err := standard.New(ImageFileUploadPath)   
 	if err != nil {
-		fmt.Printf("standard.New failed: %v", err)
+		app.serverError(w, r, err)
 		return
 	}
 	
 	// save file    
 	if err = qrc.Save(wr); err != nil {
-		fmt.Printf("could not save image: %v", err)
+		app.serverError(w, r, err)
+		return
 	}
+
+
+	// Redirect back to homepage after successful generation
+	http.Redirect(w, r, "/", http.StatusSeeOther)
 
 
 
