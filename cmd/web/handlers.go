@@ -3,7 +3,11 @@ package main
 import (
 	"net/http"
 
+
+    //"github.com/yeqown/go-qrcode/v2"
+	//"github.com/yeqown/go-qrcode/writer/standard"
 	"github.com/Ola-Daniel/qrcodebakery/internal/response"
+	
 )
 
 func (app *application) home(w http.ResponseWriter, r *http.Request) {
