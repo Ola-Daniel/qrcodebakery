@@ -1,5 +1,36 @@
 {{define "page:title"}}QR Code Bakery{{end}}
 
 {{define "page:main"}}
-<p>Welcome to QR Code Bakery.</p>
+<style> 
+.center {
+    text-align: center;
+}
+
+form {
+     margin-top: 20px;
+     }
+
+input[type="text"] {
+    padding: 8px;
+    width: 200px;
+    }
+
+input[type="submit"] {
+    padding: 8px  16px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    cursor: pointer;  
+    }
+    
+</style>
+<p class="center">Welcome to QR Code Bakery.</p>
+<br>
+<div class="center">Please enter the string you want to QR Encode:</div> 
+<div class="center">
+<form action="/generate" method="post">
+<input type="text" name="dataString">
+<input type="submit" value="Generate QRCode">
+</form>
+</div>
 {{end}}
