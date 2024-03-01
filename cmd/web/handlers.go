@@ -1,13 +1,13 @@
 package main
 
 import (
+	"fmt"
 	"net/http"
 
-
-    //"github.com/yeqown/go-qrcode/v2"
-	//"github.com/yeqown/go-qrcode/writer/standard"
+	"github.com/Ola-Daniel/qrcodebakery/internal/request"
 	"github.com/Ola-Daniel/qrcodebakery/internal/response"
-	
+	"github.com/yeqown/go-qrcode/v2"
+	"github.com/yeqown/go-qrcode/writer/standard"
 )
 
 func (app *application) home(w http.ResponseWriter, r *http.Request) {
@@ -58,6 +58,37 @@ func (app *application) signup(w http.ResponseWriter, r *http.Request) {
 }
 
 func (app *application) generate(w http.ResponseWriter, r *http.Request) {
+
+    type response struct {
+		DataString string `form:"dataString"`
+	}
+    var form response
+
+	err := request.DecodePostForm(r, &form)
+	if err != nil {
+		app.badRequest(w, r, err)
+		return
+	}
+
+     
+	qrc, err := qrcode.New(form.DataString)
+	if err != nil {
+		fmt.Printf("could not generate QRCode: %v", err) 
+		return
+	}
+	
+	wr, err := standard.New("./files/generated/test-qrcode.jpeg") 
+	if err != nil {
+		fmt.Printf("standard.New failed: %v", err)
+		return
+	}
+	
+	// save file    
+	if err = qrc.Save(wr); err != nil {
+		fmt.Printf("could not save image: %v", err)
+	}
+
+
 
 }
 
