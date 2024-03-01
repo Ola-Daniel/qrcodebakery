@@ -18,6 +18,8 @@ func (app *application) routes() http.Handler {
 
 	fileServer := http.FileServer(http.FS(assets.EmbeddedFiles))
 	mux.PathPrefix("/static/").Handler(fileServer)
+	//mux.PathPrefix("/files/").Handler(fileServer)  
+
 
 	mux.HandleFunc("/", app.home).Methods("GET")
 
