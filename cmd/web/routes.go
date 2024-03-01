@@ -31,7 +31,7 @@ func (app *application) routes() http.Handler {
 
     mux.HandleFunc("/login", app.login).Methods("GET", "POST")
 
-	mux.HandleFunc("/signup", app.signup).Methods("GET", "POST")
+	mux.HandleFunc("/sign-up", app.signup).Methods("GET", "POST")
 
 
 
