@@ -71,8 +71,8 @@ type application struct {
 func run(logger *slog.Logger) error {
 	var cfg config
 
-	cfg.baseURL = env.GetString("BASE_URL", "http://localhost:5555")
-	cfg.httpPort = env.GetInt("HTTP_PORT", 5555)
+	cfg.baseURL = env.GetString("BASE_URL", "http://localhost:5555")//
+	cfg.httpPort = env.GetInt("HTTP_PORT", 5555)//
 	cfg.basicAuth.username = env.GetString("BASIC_AUTH_USERNAME", "admin")
 	cfg.basicAuth.hashedPassword = env.GetString("BASIC_AUTH_HASHED_PASSWORD", "$2a$10$jRb2qniNcoCyQM23T59RfeEQUbgdAXfR6S0scynmKfJa5Gj3arGJa")
 	cfg.cookie.secretKey = env.GetString("COOKIE_SECRET_KEY", "zt2eeito5ur2kqc7ylhzlbzn3lmqrwrw")
@@ -90,7 +90,7 @@ func run(logger *slog.Logger) error {
 	showVersion := flag.Bool("version", false, "display version and exit")
 
 	flag.Parse()
-
+//
 	if *showVersion {
 		fmt.Printf("version: %s\n", version.Get())
 		return nil
