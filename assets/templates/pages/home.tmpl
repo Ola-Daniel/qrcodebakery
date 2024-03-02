@@ -33,7 +33,10 @@ input[type="submit"] {
 <input type="submit" value="Generate QRCode">
 </form>
 </div>
+
+{{ if ne .QRCodeImagePath "" }}
 <div class="center">
 <img src="{{.QRCodeImagePath}}" alt="QR Code">
 </div>
-{{end}}
+{{ end }}
+{{end}}   
