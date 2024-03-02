@@ -4,3 +4,4 @@ build-errors.log
 *.exe
 .env
 *env
+files/
