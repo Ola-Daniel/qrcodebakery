@@ -17,8 +17,13 @@ func (app *application) routes() http.Handler {
 	mux.Use(app.securityHeaders)
 
 	fileServer := http.FileServer(http.FS(assets.EmbeddedFiles))
+
 	mux.PathPrefix("/static/").Handler(fileServer)
-	//mux.PathPrefix("/files/").Handler(fileServer)  
+
+
+	generatedFileServer := http.FileServer(http.Dir("files/generated"))
+
+	mux.PathPrefix("/files/generated/").Handler(http.StripPrefix("/files/generated/", generatedFileServer))     
 
 
 	mux.HandleFunc("/", app.home).Methods("GET")
