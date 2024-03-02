@@ -69,7 +69,6 @@ func (app *application) generate(w http.ResponseWriter, r *http.Request) {
 
     type response struct {
 		DataString string `form:"dataString"`
-		QRCodeImagePath string `form:"QRCodeImagePath"`
 	}
     var form response
 
@@ -94,7 +93,7 @@ func (app *application) generate(w http.ResponseWriter, r *http.Request) {
 
 	ImageFileUploadPath = "./files/generated/"+ImageFile     
 	
-	//ImageFilePath := "./assets"+ImageFile    
+ 
 	
 	wr, err := standard.New(ImageFileUploadPath)   
 	if err != nil {
