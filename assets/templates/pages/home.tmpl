@@ -7,8 +7,8 @@
 }
 
 form {
-     margin-top: 20px;
-     }
+    margin-top: 20px;
+    }
 
 input[type="text"] {
     padding: 8px;
@@ -22,6 +22,25 @@ input[type="submit"] {
     border: none;
     cursor: pointer;  
     }
+
+
+    /* Style for download button */
+
+.center button {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #008CBA;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+
+.center button:hover {
+    background-color: #005f7f;
+}  
     
 </style>
 <p class="center">Welcome to QR Code Bakery.</p>
@@ -30,7 +49,7 @@ input[type="submit"] {
 <div class="center">
 <form action="/generate" method="post">
 <input type="text" name="dataString">
-<input type="submit" value="Generate QRCode">
+<input type="submit" value="Generate QR Code">
 </form>
 </div>
 
@@ -38,5 +57,10 @@ input[type="submit"] {
 <div class="center">
 <img src="{{.QRCodeImagePath}}" alt="QR Code">
 </div>
+   <div class="center">
+    <a href="{{.QRCodeImagePath}}" download="generated_qr_code.jpg">
+    <button>Download QR Code</button>
+    </a>
+    </div>
 {{ end }}
 {{end}}   
