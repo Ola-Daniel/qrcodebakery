@@ -42,17 +42,41 @@ input[type="submit"] {
 .center button:hover {
     background-color: #005f7f;
 }  
+
+.radio-options {
+    margin-top: 20px;
+    text-align: center;
+}
+
+
+.radio-options label {
+    margin-right: 20px;
+}
+
+
+
     
 </style>
 <p class="center">Welcome to QR Code Bakery.</p>
 <br>
-<div class="center">Please enter the string you want to QR Encode:</div> 
+<div class="center">Please enter the data you want to QR Encode:</div> 
 <div class="center">
 <form action="/generate" method="post">
-<input type="text" name="dataString" placeholder="Enter your text here....">
-<input type="submit" value="Generate QR Code">
-</form>
+<div class="radio-options center">
+    <input type="radio" id="url" name="dataType" value="URL"> 
+
+    <label for="url">URL</label>
+
+    <input type="radio" id="contact" name="dataType" value="Contact">
+    <label for="contact">Contact Information</label>
+
+    <input type="radio" id="wifi" name="dataType" value="WiFi" >
+    <label for="wifi">WiFi Credentials</label>
 </div>
+<input type="text" id="dataString" name="dataString" placeholder=" Enter data here...">  
+<input type="submit" value="Generate QR Code"> 
+</form>
+</div>  
 
 {{ if ne .QRCodeImagePath "" }}
 <div class="center">
