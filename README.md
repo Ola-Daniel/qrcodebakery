@@ -57,6 +57,7 @@ Roadmap
 - [x] URL Link
 - [ ] Vcards
 - [ ] WiFi Credentials
+- [ ] Inventory Tracking
 
 
 
