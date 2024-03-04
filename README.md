@@ -54,13 +54,10 @@ Roadmap
 -------
 
 
-- [ ] 
-- [ ] 
-- [ ] 
-- [ ] 
-- [ ]   
-- [ ] 
-- [ ] 
+- [x] URL Link
+- [ ] Vcards
+- [ ] WiFi Login Credentials
+
 
 
 Contribute
