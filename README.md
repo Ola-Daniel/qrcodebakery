@@ -30,8 +30,8 @@ How can i use this tool to generate QR Codes?
 -------------------------------------------
 
 - Visit QR Code Bakery @ https://qrcodebakery.com
-- Choose the type of QR code you want to create (URL, text, contact, etc)
-- Enter the relevant data (e.g., URL, phone number or text)
+- Choose the type of QR code you want to create (URL, WiFi, contact, etc)
+- Enter the relevant data (e.g., URL, contact details or WiFi credentials)
 - Customize the QR code (colors, logo, etc) if desired.
 - Click "Generate" to create your QR code.
 - Download the QR code image and start using it!
@@ -56,7 +56,7 @@ Roadmap
 
 - [x] URL Link
 - [ ] Vcards
-- [ ] WiFi Login Credentials
+- [ ] WiFi Credentials
 
 
 
