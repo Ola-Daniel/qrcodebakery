@@ -58,6 +58,7 @@ Roadmap
 - [ ] Vcards
 - [ ] WiFi Credentials
 - [ ] Inventory Tracking
+- [ ] Dynamic QR Codes
 
 
 
