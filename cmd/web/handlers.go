@@ -5,6 +5,7 @@ import (
 	"net/http"
 	"net/url"
 	"regexp"
+	"errors"
 
 	"github.com/Ola-Daniel/qrcodebakery/internal/request"
 	"github.com/Ola-Daniel/qrcodebakery/internal/response"
@@ -86,10 +87,15 @@ func (app *application) generate(w http.ResponseWriter, r *http.Request) {
 		form.DataType = "URL"
 	}
 
-    
+
+	if form.DataString == "" {
+		app.badRequest(w, r, errors.New("input data cannot be empty")) 
+	}
+       
+
+	
 	switch form.DataType {
 	case "URL":
-
 
 		//Validate URL and domain
 		if err := validateURL(form.DataString);
@@ -97,12 +103,23 @@ func (app *application) generate(w http.ResponseWriter, r *http.Request) {
 				app.badRequest(w, r, err)     
 			}
 		
-
+        //Validate Vcard
 	case "Contact": 
 
+
+	    if err := validateVcard(form.DataString);
+		    err != nil {
+				app.badRequest(w, r, err)
+			}
+       //Validate Wifi Connection String
 	case "WiFi":
 
-	default:
+		if err := validateWifi(form.DataString);
+		    err != nil {
+				app.badRequest(w, r, err)
+			}
+
+	default: 
 
 		
 	} 
@@ -174,4 +191,33 @@ func validateURL(inputURL string) error {
 	}
 
 	return nil
+}
+
+
+func validateVcard(input string) error {
+	vCardRegex := `BEGIN:VCARD.*END:VCARD`
+	match, err := regexp.MatchString(vCardRegex, input)
+	if err != nil {
+		return err
+	}
+
+	if !match {
+		return err
+	}
+	return nil
+}
+
+
+func validateWifi(input string) error {
+
+    wifiRegex := `WIFI:T:.*;s;.*;p:.*;;`
+	match, err := regexp.MatchString(wifiRegex, input)
+	if err != nil {
+		return err
+	}
+
+	if !match {
+		return err
+	}
+	return nil 
 }
