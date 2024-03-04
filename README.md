@@ -70,7 +70,7 @@ Contribute
 Support
 -------
 
-If you encouter any issues or need assistance, feel free to reach out to me on X @ https://twitter.com/horla_dan 
+If you encounter any issues or need assistance, feel free to reach out to me on X @ https://twitter.com/horla_dan 
 
 Disclaimer
 ----------
