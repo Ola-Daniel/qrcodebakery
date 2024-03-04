@@ -3,12 +3,14 @@ package main
 import (
 	//"fmt"
 	"net/http"
+	"net/url"
+	"regexp"
 
 	"github.com/Ola-Daniel/qrcodebakery/internal/request"
 	"github.com/Ola-Daniel/qrcodebakery/internal/response"
+	"github.com/google/uuid"
 	"github.com/yeqown/go-qrcode/v2"
 	"github.com/yeqown/go-qrcode/writer/standard"
-	"github.com/google/uuid"
 )
 
 
@@ -69,6 +71,7 @@ func (app *application) generate(w http.ResponseWriter, r *http.Request) {
 
     type response struct {
 		DataString string `form:"dataString"`
+		DataType   string `form:"dataType"` //Field for radio button value
 	}
     var form response
 
@@ -78,12 +81,39 @@ func (app *application) generate(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-     
-	qrc, err := qrcode.New(form.DataString)
-	if err != nil {
-		app.serverError(w, r, err)
-		return
+
+	if form.DataType == "" {
+		form.DataType = "URL"
 	}
+
+    
+	switch form.DataType {
+	case "URL":
+
+
+		//Validate URL and domain
+		if err := validateURL(form.DataString);
+		    err != nil {
+				app.badRequest(w, r, err)     
+			}
+		
+
+	case "Contact": 
+
+	case "WiFi":
+
+	default:
+
+		
+	} 
+	qrc, err := qrcode.New(form.DataString)
+		if err != nil {
+			app.serverError(w, r, err)
+			return
+		}
+
+     
+
 
 
 	random := uuid.New().String()
@@ -120,4 +150,28 @@ func (app *application) generate(w http.ResponseWriter, r *http.Request) {
 
 func (app *application) protected(w http.ResponseWriter, r *http.Request) {
 	w.Write([]byte("This is a protected handler"))
+}
+
+
+
+
+func validateURL(inputURL string) error {
+	u, err := url.ParseRequestURI(inputURL)
+	if err != nil {
+		return err
+	}
+
+	if u.Scheme == "" || u.Host == "" {
+		return err
+	}
+
+
+
+	//Check if the host name is a valid domain
+	domainRegex := regexp.MustCompile(`^[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$`)
+	if !domainRegex.MatchString(u.Host) {
+		return err
+	}
+
+	return nil
 }
