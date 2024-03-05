@@ -67,11 +67,20 @@ input[type="submit"] {
     <label for="url">URL</label>
 
     <input type="radio" id="contact" name="dataType" value="Contact">  
-    <label for="contact">Contact Information</label>
+    <label for="contact">Contact Information (Vcard)</label>
 
     <input type="radio" id="wifi" name="dataType" value="WiFi" >
     <label for="wifi">WiFi Credentials</label>
 </div>
+ 
+      
+<div class="center">
+<br> 
+Enter URL in the following format: https://example.com <br>
+Enter Vcard Details in the following format: BEGIN:VCARD and END:VCARD <br>
+Enter WiFi Credentials in the following format: WIFI:S:<SSID>;T:<WPA|WEP|>;P:<password>;; <br>
+</div>
+<br>
 <input type="text" id="dataString" name="dataString" placeholder=" Enter data here..." required>   
 <input type="submit" value="Generate QR Code"> 
 </form>
