@@ -60,8 +60,8 @@ jobs:
     - name: Inject envfile
       uses: SpicyPizza/create-envfile@v2.0
       with:
-         envkey_DB_DSN: ${{ secrets.DB_DSN }}
-         envkey_HTTP_PORT: "5555"
+        envkey_DB_DSN: ${{ secrets.DB_DSN }}
+        envkey_HTTP_PORT: "5555"
       
     - name: Build container image
       run: 'docker build -t ${{ secrets.REGISTRY_NAME }}/qrcodebakery:$(echo $GITHUB_SHA | head -c7) .'
