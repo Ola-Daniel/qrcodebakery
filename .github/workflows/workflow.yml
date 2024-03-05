@@ -66,6 +66,10 @@ jobs:
     - name: Build container image
       run: 'docker build -t ${{ secrets.REGISTRY_NAME }}/qrcodebakery:$(echo $GITHUB_SHA | head -c7) .'
 
+
+    - name: Log in to DigitalOcean Container Registry with short-lived credentials
+      run: doctl registry login --expiry-seconds 1200
+
     - name: Run Trivy Scan
       uses: aquasecurity/trivy-action@master
       with:
@@ -75,9 +79,6 @@ jobs:
         ignore-unfixed: true
         vuln-type: 'os,library'
         severity: 'CRITICAL,HIGH'
-
-    - name: Log in to DigitalOcean Container Registry with short-lived credentials
-      run: doctl registry login --expiry-seconds 1200
 
     - name: Push image to DigitalOcean Container Registry
       run: docker push ${{ secrets.REGISTRY_NAME }}/qrcodebakery:$(echo $GITHUB_SHA | head -c7)
