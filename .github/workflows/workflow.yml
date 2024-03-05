@@ -28,16 +28,16 @@ jobs:
       run: go mod verify
 
     - name: Build
-      run: go build .
+      run: go build ./cmd/web
 
     - name: Run go vet
-      run: go vet .
+      run: go vet ./cmd/web
 
     - name: Install staticcheck
       run: go install honnef.co/go/tools/cmd/staticcheck@latest
 
     - name: Run staticcheck
-      run: staticcheck .
+      run: staticcheck ./cmd/web
 
 
 
