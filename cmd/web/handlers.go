@@ -195,7 +195,7 @@ func validateURL(inputURL string) error {
 
 
 func validateVcard(input string) error {
-	vCardRegex := `BEGIN:VCARD.*END:VCARD`
+	vCardRegex := `BEGIN:VCARD*END:VCARD`
 	match, err := regexp.MatchString(vCardRegex, input)
 	if err != nil {
 		return err
