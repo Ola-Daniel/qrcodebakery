@@ -61,8 +61,9 @@ jobs:
       run: 'docker build -t registry.digitalocean.com/danieloo/qrcodebakery:$(echo $GITHUB_SHA | head -c7) .'
 
     - name: Run Trivy Scan
-      run: aquasecurity/trivy-action@master
-       with:
+      run: |
+        aquasecurity/trivy-action@master
+        with:
           image-ref: 'registry.digitalocean.com/danieloo/qrcodebakery:$(echo $GITHUB_SHA | head -c7)'
           format: 'table'
           exit-code: '1'
