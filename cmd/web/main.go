@@ -76,7 +76,7 @@ func run(logger *slog.Logger) error {
 	cfg.basicAuth.username = env.GetString("BASIC_AUTH_USERNAME", "admin")
 	cfg.basicAuth.hashedPassword = env.GetString("BASIC_AUTH_HASHED_PASSWORD", "$2a$10$jRb2qniNcoCyQM23T59RfeEQUbgdAXfR6S0scynmKfJa5Gj3arGJa")
 	cfg.cookie.secretKey = env.GetString("COOKIE_SECRET_KEY", "zt2eeito5ur2kqc7ylhzlbzn3lmqrwrw")
-	cfg.db.dsn = env.GetString("DB_DSN", "") //for dev postgres:password@localhost:5432/qrcodebakery?sslmode=disable
+	cfg.db.dsn = env.GetString("DB_DSN", "vopgmcku:b7hU-QUv5YG8M2p-8qizZX91Raj6VnH0@ruby.db.elephantsql.com/vopgmcku") //for dev postgres:password@localhost:5432/qrcodebakery?sslmode=disable
 	cfg.db.automigrate = env.GetBool("DB_AUTOMIGRATE", true)
 	cfg.notifications.email = env.GetString("NOTIFICATIONS_EMAIL", "")
 	cfg.session.secretKey = env.GetString("SESSION_SECRET_KEY", "akauxvqnxvimnbo2ydpfnoeyjz73rn3w")
