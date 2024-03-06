@@ -61,7 +61,8 @@ jobs:
       uses: SpicyPizza/create-envfile@v2.0
       with:
         envkey_DB_DSN: ${{ secrets.DB_DSN }}
-        #envkey_HTTP_PORT: "5555"
+        envkey_HTTP_PORT: 80
+        envkey_BASE_URL: "http://localhost"
         fail_on_empty: true
       
     - name: Build container image
