@@ -23,12 +23,12 @@ spec:
       - name: qrcodebakery
         image: <IMAGE>
         ports:
-        - containerPort: 5555
+        - containerPort: 
         resources:
           requests:
-            cpu: 500m
+            cpu: 300m
           limits:
-            cpu: 500m
+            cpu: 300m
 ---
 apiVersion: v1
 kind: Service
@@ -40,6 +40,6 @@ spec:
     - name: http
       protocol: TCP
       port: 80
-      targetPort: 5555
+      targetPort: 80
   selector:
     app: qrcodebakery
