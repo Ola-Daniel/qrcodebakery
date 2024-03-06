@@ -4,12 +4,12 @@ FROM golang:latest
 
 WORKDIR /app
 
-ADD . /app/
+COPY . .
 
-RUN go build ./cmd/web
+RUN go build -o main ./cmd/web
 
-EXPOSE 5555
+EXPOSE 80
 
-USER nonroot:nonroot
+#USER nonroot:nonroot
 
-ENTRYPOINT ["main.go"]
+ENTRYPOINT ["./main"]
