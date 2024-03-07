@@ -1,0 +1,10 @@
+provider: digitalocean
+
+digitalocean:
+  apiToken: <api token>
+
+interval: "1m"
+
+policy: sync # or upsert-only
+
+# domainFilters: [ 'your_domain' ]
