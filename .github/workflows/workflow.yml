@@ -75,7 +75,7 @@ jobs:
     - name: Run Trivy Scan
       uses: aquasecurity/trivy-action@master
       with:
-        image-ref: '${{ secrets.REGISTRY_NAME }}/qrcodebakery:$(echo $GITHUB_SHA | head -c7)'
+        image-ref: ${{ secrets.REGISTRY_NAME }}/qrcodebakery:latest
         format: 'table'
         exit-code: '1'
         ignore-unfixed: true
