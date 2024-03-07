@@ -82,8 +82,9 @@ jobs:
         format: 'table'
         exit-code: '1'
         ignore-unfixed: true
-        vuln-type: 'os' #,library
+        vuln-type: 'os,library'
         severity: 'CRITICAL,HIGH'
+        scanners: 'vuln'
 
     - name: Push image to DigitalOcean Container Registry
       run: docker push ${{ secrets.REGISTRY_NAME }}/qrcodebakery:$(echo $GITHUB_SHA | head -c7)
