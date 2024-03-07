@@ -8,7 +8,7 @@ COPY . .
 
 RUN go build -o main ./cmd/web
 
-EXPOSE 80
+EXPOSE 5555
 
 #USER nonroot:nonroot
 
