@@ -20,6 +20,12 @@ var ImageFile string
 var ImageFileUploadPath string
 
 func (app *application) home(w http.ResponseWriter, r *http.Request) {
+
+
+	if r.Method == http.MethodGet {
+		//Clear the content of ImageFileUploadPath
+		ImageFileUploadPath = ""
+	}
 	data := app.newTemplateData(r)
 
 	data["QRCodeImagePath"] = ImageFileUploadPath
