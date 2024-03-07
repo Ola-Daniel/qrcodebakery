@@ -68,6 +68,9 @@ jobs:
     - name: Build container image
       run: 'docker build -t ${{ secrets.REGISTRY_NAME }}/qrcodebakery:$(echo $GITHUB_SHA | head -c7) .'
 
+    - name: Tag image as latest
+      run: docker tag ${{ secrets.REGISTRY_NAME }}/qrcodebakery:$(echo $GITHUB_SHA | head -c7) ${{ secrets.REGISTRY_NAME }}/qrcodebakery:latest
+
 
     - name: Log in to DigitalOcean Container Registry with short-lived credentials
       run: doctl registry login --expiry-seconds 1200
@@ -75,7 +78,7 @@ jobs:
     - name: Run Trivy Scan
       uses: aquasecurity/trivy-action@master
       with:
-        image-ref: ${{ secrets.REGISTRY_NAME }}/qrcodebakery:$(echo $GITHUB_SHA )
+        image-ref: ${{ secrets.REGISTRY_NAME }}/qrcodebakery:latest 
         format: 'table'
         exit-code: '1'
         ignore-unfixed: true
