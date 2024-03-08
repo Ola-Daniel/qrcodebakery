@@ -43,5 +43,9 @@ spec:
       protocol: TCP
       port: 80
       targetPort: 5555
+    - name: https
+      protocol: TCP
+      port: 443
+      targetPort: 5555
   selector:
     app: qrcodebakery
