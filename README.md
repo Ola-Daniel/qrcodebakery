@@ -59,6 +59,8 @@ Roadmap
 - [ ] WiFi Credentials
 - [ ] Inventory Tracking
 - [ ] Dynamic QR Codes
+- [ ] Custom logo
+- [ ] Custom colors
 
 
 
