@@ -10,6 +10,6 @@ RUN go build -o main ./cmd/web
 
 EXPOSE 5555
 
-#USER nonroot:nonroot
+USER nonroot:nonroot
 
 ENTRYPOINT ["./main"]
