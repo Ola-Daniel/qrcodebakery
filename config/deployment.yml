@@ -45,3 +45,23 @@ spec:
       targetPort: 5555
   selector:
     app: qrcodebakery
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: qrcodebakery-ingress
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    external-dns.alpha.kubernetes.io/hostname: qrcodebakery.com
+spec:
+  rules:
+  - host: "qrcodebakery.com"
+    http:
+      paths:
+      - pathType: Prefix
+        path: "/"
+        backend:
+          service:
+            name: qrcodebakery-service
+            port:
+              number: 80
