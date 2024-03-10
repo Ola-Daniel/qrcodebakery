@@ -73,7 +73,7 @@ Contribute
 Support
 -------
 
-If you encounter any issues or need assistance, feel free to open a new issue here: https://github.com/Ola-Daniel/qrcodebakery/issues  
+- If you encounter any issues or need assistance, feel free to open a new issue here: https://github.com/Ola-Daniel/qrcodebakery/issues  
 
 Disclaimer
 ----------
