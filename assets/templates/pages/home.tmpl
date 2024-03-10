@@ -7,19 +7,18 @@
 form {
     margin-top: 20px;
     }
-
 input[type="text"] {
     padding: 8px;
-    width: 250px;
+    width: 80%; 
     } 
-
 input[type="submit"] {
     padding: 8px  16px; 
     background-color: #4CAF50;
-    width: 170px; 
+    width: 25%; 
     color: white;
     border: none;
-    cursor: pointer;  
+    cursor: pointer;
+    transition: background-color 0.3s ease;  
     }
     /* Style for download button */
 .center button {
@@ -63,10 +62,8 @@ input[type="submit"] {
 <div class="radio-options center">
     <input type="radio" id="url" name="dataType" value="URL" checked>   
     <label for="url">URL</label>
-
     <input type="radio" id="contact" name="dataType" value="Contact">  
     <label for="contact">Contact Information (Vcard)</label>
-
     <input type="radio" id="wifi" name="dataType" value="WiFi" >
     <label for="wifi">WiFi Credentials</label>
 </div>
