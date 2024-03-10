@@ -1,13 +1,17 @@
 {{define "partial:footer"}}
 <footer>
-    <br>
-    <ul style="text-align: right;">
-    <a href="/tos">Terms of Service</a>
-    <br>
-    <a href="/privacy-policy">Privacy Policy</a>
-    <br>  
-    <a href="/disclaimer">Disclaimer</a>
-    <br> 
+
+
+<div style="display: flex; justify-content: space-between;">
+        <div>
+            <a href="https://github.com/Ola-Daniel/qrcodebakery" target="_blank">GitHub</a>
+        </div>
+        <div>
+            <a href="/tos">Terms of Service</a><br>
+            <a href="/privacy-policy">Privacy Policy</a><br>
+            <a href="/disclaimer">Disclaimer</a>
+        </div>
+    </div>
     <div style="text-align: center;">
     &copy; Daniel Ola-Olorun {{now | formatTime "2006"}} 
     </div>    
