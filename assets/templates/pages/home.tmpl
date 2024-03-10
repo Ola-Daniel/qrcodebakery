@@ -1,5 +1,4 @@
 {{define "page:title"}}QRCodeBakery{{end}}
-
 {{define "page:main"}}
 <style> 
 .center {
@@ -36,7 +35,6 @@ input[type="submit"] {
 .center button:hover {
     background-color: #005f7f;
 }  
-
 .radio-options {
     margin-top: 20px;
     text-align: center;
@@ -44,7 +42,18 @@ input[type="submit"] {
 .radio-options label {
     margin-right: 20px;
 }
-    
+
+@media screen and (max-width: 600px) {
+.center {
+    text-align: center;
+}
+input[type="text"] {
+    width: 100%;
+}
+input[type="submit"] {
+    width: 100%;
+}
+}
 </style>
 <p class="center">Welcome to QRCodeBakery.</p>
 <br>
@@ -61,8 +70,6 @@ input[type="submit"] {
     <input type="radio" id="wifi" name="dataType" value="WiFi" >
     <label for="wifi">WiFi Credentials</label>
 </div>
- 
-      
 <div class="center">
 <br> 
 Enter URL in the following format: https://example.com <br>
@@ -74,7 +81,6 @@ Enter WiFi Credentials in the following format: WIFI:S:<SSID>;T:<WPA|WEP|>;P:<pa
 <input type="submit" value="Generate QR Code"> 
 </form>
 </div>  
-
 {{ if ne .QRCodeImagePath "" }}
 <div class="center">
 <img src="{{.QRCodeImagePath}}" alt="QR Code">
