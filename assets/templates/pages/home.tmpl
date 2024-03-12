@@ -42,6 +42,16 @@ input[type="submit"] {
     margin-right: 20px;
 }
 
+.image-container {
+  display: flex;
+  justify-content: center;
+}
+
+.image-container img {
+  max-width: 100%;
+  height: auto;
+  }
+
 @media screen and (max-width: 600px) {
 .center {
     text-align: center;
@@ -83,7 +93,7 @@ Enter WiFi Credentials in the following format: WIFI:S:<SSID>;T:<WPA|WEP|>;P:<pa
 </div>  
 {{ if ne .QRCodeImagePath "" }}
 <div class="center">
-<div class="center">
+<div class="image-container">
 <img src="{{.QRCodeImagePath}}" alt="QR Code">
 </div>
    <div class="center">
