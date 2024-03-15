@@ -100,3 +100,5 @@ Daniel Ola-Olorun
 - Twitter: https://twitter.com/horla_dan  
 
 - Website: https://danieloo.com 
+
+- Email:  hey@danieloo.com
