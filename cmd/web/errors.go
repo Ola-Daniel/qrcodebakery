@@ -54,3 +54,10 @@ func (app *application) basicAuthenticationRequired(w http.ResponseWriter, r *ht
 	message := "You must be authenticated to access this resource"
 	http.Error(w, message, http.StatusUnauthorized)
 }
+
+
+func (app *application) invalidCredentials(w http.ResponseWriter, r *http.Request, err error) {
+	message := "Provided Credentials are invalid"
+	http.Error(w, message, http.StatusUnauthorized)
+}
+
