@@ -1,11 +1,20 @@
 {{define "page:title"}}Dashboard{{end}}
 
 {{define "page:main"}}
-
-<h1>Dashboard</h1>
-<br>
-<div>
-
+<div class="dashboard-container">
+    <div class="dashboard-header">
+        <h1>Welcome to Your Dashboard</h1>
+    </div>
+    <div class="dashboard-menu">
+        <ul>
+            <li><a href="#">View QR Codes</a></li>
+            <li><a href="#">Create QR Code</a></li>
+            <!-- Add more menu items as needed -->
+        </ul>
+    </div>
+    <div class="dashboard-content">
+        <p>Here, you can manage your dynamic QR codes.</p>
+        <!-- You can add more content or features here -->
+    </div>
 </div>
-
-{{end}}   
+{{end}}
