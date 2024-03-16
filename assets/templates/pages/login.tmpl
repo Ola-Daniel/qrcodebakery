@@ -1,0 +1,12 @@
+{{define "page:title"}}Login{{end}}
+
+{{define "page:main"}}
+<div class="login-form">
+    <h2>Login</h2>
+    <form action="/login" method="POST" class="form">
+        <input type="text" name="Username" placeholder="Username or Email" class="input-field" value="{{.Form.Username}}">
+        <input type="password" name="Password" placeholder="Password" class="input-field" value="{{.Form.Password}}">
+        <button type="submit" class="btn">Login</button>
+    </form>
+</div>
+{{end}}
