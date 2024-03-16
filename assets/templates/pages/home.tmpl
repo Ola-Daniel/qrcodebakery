@@ -14,7 +14,7 @@ input[type="text"] {
 input[type="submit"] {
     padding: 8px  16px; 
     background-color: #4CAF50;
-    width: 25%; 
+    width: 30%; 
     color: white;
     border: none;
     cursor: pointer;
@@ -88,7 +88,9 @@ Enter WiFi Credentials in the following format: WIFI:S:&lt;SSID&gt;;T:&lt;WPA|WE
 <input type="text" id="dataString" name="dataString" placeholder=" Enter data here..." required>   
 <!-- <input type="file" id="logo" name="logo" accept="image/*"> -->
 <br>
-<input type="submit" value="Generate QR Code"> 
+<input type="submit" value="Generate Static QR Code">   
+<!-- New "Generate Dynamic QR Code" button -->
+<input type="submit" name="dynamic" value="Get Dynamic QR Code" style="background-color: orange; color: white;"> 
 </form>
 </div>  
 {{ if ne .QRCodeImagePath "" }}
