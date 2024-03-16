@@ -35,7 +35,8 @@ How can i use this tool to generate Static QR Codes?
 - Customize the QR code (colors, logo, etc) if desired.
 - Click "Generate Static QR code" to create your QR code.
 - Download the QR code image and start using it!
-- Note: Static QR code are never saved on our servers
+
+Note: Static QR code are never saved on our servers
 
 
 
