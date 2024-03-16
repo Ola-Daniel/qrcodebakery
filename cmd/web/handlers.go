@@ -9,6 +9,7 @@ import (
 
 	"github.com/Ola-Daniel/qrcodebakery/internal/request"
 	"github.com/Ola-Daniel/qrcodebakery/internal/response"
+	"github.com/Ola-Daniel/qrcodebakery/internal/validator"
 	"github.com/google/uuid"
 	"github.com/yeqown/go-qrcode/v2"
 	"github.com/yeqown/go-qrcode/writer/standard"
@@ -207,8 +208,9 @@ func (app *application) admin(w http.ResponseWriter, r *http.Request) {
 func (app *application) generate(w http.ResponseWriter, r *http.Request) {
 
     type response struct {
-		DataString string `form:"dataString"`
-		DataType   string `form:"dataType"` //Field for radio button value
+		DataString string              `form:"dataString"`
+		DataType   string              `form:"dataType"` //Field for radio button value
+		Validator  validator.Validator `form:"-"`
 	}
     var form response
 
@@ -222,6 +224,11 @@ func (app *application) generate(w http.ResponseWriter, r *http.Request) {
 	if form.DataType == "" {
 		form.DataType = "URL"
 	}
+
+
+	
+
+	form.Validator.CheckField(form.DataString != "", "Data", "Input data cannot be empty")
 
 
 	if form.DataString == "" {
