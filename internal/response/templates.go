@@ -19,6 +19,17 @@ func PageWithHeaders(w http.ResponseWriter, status int, data any, headers http.H
 	return NamedTemplateWithHeaders(w, status, data, headers, "base", patterns...)
 }
 
+func DashboardPage(w http.ResponseWriter, status int, data any, pagePath string) error {
+	return DashboardPageWithHeaders(w, status, data, nil, pagePath) 
+}
+
+
+func DashboardPageWithHeaders(w http.ResponseWriter, status int, data any, headers http.Header, pagePath string) error {
+	patterns := []string{"base_without_nav.tmpl", "partials/*.tmpl", pagePath}
+
+	return NamedTemplateWithHeaders(w, status, data, headers, "base_without_nav", patterns...)
+}
+
 func NamedTemplate(w http.ResponseWriter, status int, data any, templateName string, patterns ...string) error {
 	return NamedTemplateWithHeaders(w, status, data, nil, templateName, patterns...)
 }
