@@ -176,13 +176,25 @@ func (app *application) signup(w http.ResponseWriter, r *http.Request) {
 }
 
 
+func (app *application) signout(w http.ResponseWriter, r *http.Request) {
 
+	//Clear Cookies to sign out!!!!!!!!!!
+
+
+
+	//
+	//
+	//
+
+	http.Redirect(w, r, "/", http.StatusSeeOther)
+	
+}
 
 
 func (app *application) dashboard(w http.ResponseWriter, r *http.Request) {
 	data := app.newTemplateData(r)
 
-	err := response.Page(w, http.StatusOK, data, "pages/dashboard.tmpl")
+	err := response.DashboardPage(w, http.StatusOK, data, "pages/dashboard.tmpl")
 	if err != nil {
 		app.serverError(w, r, err)
 	}

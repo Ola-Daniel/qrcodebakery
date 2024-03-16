@@ -44,6 +44,8 @@ func (app *application) routes() http.Handler {
 
 	mux.HandleFunc("/dashboard", app.dashboard).Methods("GET")
 
+    mux.HandleFunc("/dashboard/signout", app.signout).Methods("GET")
+
 
 
 	protectedRoutes := mux.NewRoute().Subrouter()
