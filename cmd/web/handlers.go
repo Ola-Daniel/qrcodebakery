@@ -1,7 +1,7 @@
 package main
 
 import (
-	//"fmt"
+	"fmt"
 	"net/http"
 	"net/url"
 	"regexp"
@@ -12,6 +12,7 @@ import (
 	"github.com/google/uuid"
 	"github.com/yeqown/go-qrcode/v2"
 	"github.com/yeqown/go-qrcode/writer/standard"
+	"golang.org/x/crypto/bcrypt"
 )
 
 
@@ -61,10 +62,10 @@ func (app *application) tos(w http.ResponseWriter, r *http.Request) {
 }
 
 func (app *application) login(w http.ResponseWriter, r *http.Request) {
-	//type loginForm struct {
-    //    UsernameOrEmail string `form:"Username"`
-    //    Password string `form:"Password"`
-    //}//  
+	type loginForm struct {
+        UsernameOrEmail string `form:"Username"`
+        Password string `form:"Password"`
+    }//  
 
 	switch r.Method {
     case http.MethodGet:
@@ -75,7 +76,7 @@ func (app *application) login(w http.ResponseWriter, r *http.Request) {
 		app.serverError(w, r, err)
 	    }
 
-    /*case http.MethodPost:
+    case http.MethodPost:
 		var form loginForm
 		err := request.DecodePostForm(r, &form)
 		
@@ -107,17 +108,17 @@ func (app *application) login(w http.ResponseWriter, r *http.Request) {
 
 		//At this point, the user is successfully authenticated
 		//Redirect the user to the rpotected page or perform any other action
-		http.Redirect(w, r, "/home", http.StatusSeeOther)*/
+		http.Redirect(w, r, "/dashboard", http.StatusSeeOther)
 	} 
 }
 
 
 func (app *application) signup(w http.ResponseWriter, r *http.Request) {
-	//type createUserForm struct {
-    //    Username string `form:"Username"`
-    //    Password string `form:"Password"`
-	//	Email string `form:"Email"`
-    //}///  
+	type createUserForm struct {
+        Username string `form:"Username"`
+        Password string `form:"Password"`
+		Email    string `form:"Email"`
+    }///  
 
 	switch r.Method {
     case http.MethodGet:
@@ -128,7 +129,7 @@ func (app *application) signup(w http.ResponseWriter, r *http.Request) {
             app.serverError(w, r, err)
         }
 
-	/*case http.MethodPost:
+	case http.MethodPost:
         var form createUserForm
 
         err := request.DecodePostForm(r, &form)
@@ -138,9 +139,9 @@ func (app *application) signup(w http.ResponseWriter, r *http.Request) {
         }
 
 		//Validate the username
-		if len(form.Username) < 4 {
+		if len(form.Username) < 8 {
 			//If the username is too short , return an error
-			app.badRequest(w, r, err)
+			app.badRequest(w, r, errors.New("username must be at least 8 characters long"))
 			return
 		}
 
@@ -150,27 +151,41 @@ func (app *application) signup(w http.ResponseWriter, r *http.Request) {
 		hashedPassword, err := bcrypt.GenerateFromPassword([]byte(form.Password), bcrypt.DefaultCost)
 		fmt.Println(hashedPassword)
 		if err != nil {
-			app.serverError(w, r, err)
+			app.badRequest(w, r, err)
 			return
 		}
 
          
-		err = bcrypt.CompareHashAndPassword([]byte(string(hashedPassword)), []byte(string(form.Password)))
-        if err != nil {
-              // Handle the error (e.g., invalid password)
-            app.invalidCredentials(w, r, err)
-            return
-        }
+		//err = bcrypt.CompareHashAndPassword([]byte(string(hashedPassword)), []byte(string(form.Password)))
+        //if err != nil {
+        //      // Handle the error (e.g., invalid password)
+       //     app.invalidCredentials(w, r, err)
+       //     return
+       // }
 	
 
 
 		err = app.db.NewUser(string(form.Username), string(hashedPassword), string(form.Email))
         if err != nil {
             app.serverError(w, r, err)
-            return///
-    }*/
+            return
+    }
+	http.Redirect(w, r, "/login", http.StatusSeeOther)
 }
 
+}
+
+
+
+
+
+func (app *application) dashboard(w http.ResponseWriter, r *http.Request) {
+	data := app.newTemplateData(r)
+
+	err := response.Page(w, http.StatusOK, data, "pages/dashboard.tmpl")
+	if err != nil {
+		app.serverError(w, r, err)
+	}
 }
 
 func (app *application) admin(w http.ResponseWriter, r *http.Request) {
@@ -272,8 +287,7 @@ func (app *application) generate(w http.ResponseWriter, r *http.Request) {
 
 
 	// Redirect back to homepage after successful generation
-	http.Redirect(w, r, "/", http.StatusSeeOther)
-
+	http.Redirect(w, r, "/", http.StatusSeeOther) 
 
 
 }
