@@ -61,11 +61,119 @@ func (app *application) tos(w http.ResponseWriter, r *http.Request) {
 }
 
 func (app *application) login(w http.ResponseWriter, r *http.Request) {
+	//type loginForm struct {
+    //    UsernameOrEmail string `form:"Username"`
+    //    Password string `form:"Password"`
+    //}//  
 
+	switch r.Method {
+    case http.MethodGet:
+	    data := app.newTemplateData(r)
+
+	    err := response.Page(w, http.StatusOK, data, "pages/login.tmpl")
+	    if err != nil {
+		app.serverError(w, r, err)
+	    }
+
+    /*case http.MethodPost:
+		var form loginForm
+		err := request.DecodePostForm(r, &form)
+		
+        if err != nil {
+            app.badRequest(w, r, err)
+            return
+        }
+		
+
+        
+		user, err := app.db.GetUser(form.UsernameOrEmail)
+
+        if err != nil {
+			//Handle the error (e.g., user not found)//
+			app.invalidCredentials(w, r, err)
+			return
+		}
+
+
+		//Compare the hashed password from the database with the password provided in the form
+		
+		err = bcrypt.CompareHashAndPassword([]byte(user.Password_hash), []byte(form.Password))
+		if err != nil {
+			//Handle the error (e.g., invalid password)
+			app.invalidCredentials(w, r, err)
+			return
+		}//
+
+
+		//At this point, the user is successfully authenticated
+		//Redirect the user to the rpotected page or perform any other action
+		http.Redirect(w, r, "/home", http.StatusSeeOther)*/
+	} 
 }
 
 
 func (app *application) signup(w http.ResponseWriter, r *http.Request) {
+	//type createUserForm struct {
+    //    Username string `form:"Username"`
+    //    Password string `form:"Password"`
+	//	Email string `form:"Email"`
+    //}///  
+
+	switch r.Method {
+    case http.MethodGet:
+        data := app.newTemplateData(r)
+
+        err := response.Page(w, http.StatusOK, data, "pages/register.tmpl")
+        if err != nil {
+            app.serverError(w, r, err)
+        }
+
+	/*case http.MethodPost:
+        var form createUserForm
+
+        err := request.DecodePostForm(r, &form)
+        if err != nil {
+            app.badRequest(w, r, err)
+            return
+        }
+
+		//Validate the username
+		if len(form.Username) < 4 {
+			//If the username is too short , return an error
+			app.badRequest(w, r, err)
+			return
+		}
+
+
+		// Hash the password using bcrypt//
+
+		hashedPassword, err := bcrypt.GenerateFromPassword([]byte(form.Password), bcrypt.DefaultCost)
+		fmt.Println(hashedPassword)
+		if err != nil {
+			app.serverError(w, r, err)
+			return
+		}
+
+         
+		err = bcrypt.CompareHashAndPassword([]byte(string(hashedPassword)), []byte(string(form.Password)))
+        if err != nil {
+              // Handle the error (e.g., invalid password)
+            app.invalidCredentials(w, r, err)
+            return
+        }
+	
+
+
+		err = app.db.NewUser(string(form.Username), string(hashedPassword), string(form.Email))
+        if err != nil {
+            app.serverError(w, r, err)
+            return///
+    }*/
+}
+
+}
+
+func (app *application) admin(w http.ResponseWriter, r *http.Request) {
 
 }
 
@@ -83,7 +191,7 @@ func (app *application) generate(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-
+ 
 	if form.DataType == "" {
 		form.DataType = "URL"
 	}
@@ -93,6 +201,13 @@ func (app *application) generate(w http.ResponseWriter, r *http.Request) {
 		app.badRequest(w, r, errors.New("input data cannot be empty")) 
 	}
        
+ 
+		// Check if the "dynamic" parameter is present
+	if r.FormValue("dynamic") != "" {
+		// Redirect to login page if dynamic parameter is present
+		http.Redirect(w, r, "/sign-up", http.StatusSeeOther)
+		return
+	}
 
 	
 	switch form.DataType {
