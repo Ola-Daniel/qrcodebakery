@@ -55,7 +55,7 @@ Roadmap
 
 
 - [x] URL Link
-- [ ] Vcards
+- [x] Vcards
 - [x] WiFi Credentials
 - [ ] Inventory Tracking
 - [ ] Dynamic QR Codes
