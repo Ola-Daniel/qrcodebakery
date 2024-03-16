@@ -192,6 +192,24 @@ func (app *application) signout(w http.ResponseWriter, r *http.Request) {
 }
 
 
+
+func (app *application) viewQRCodes(w http.ResponseWriter, r *http.Request) {
+
+
+	http.Redirect(w, r, "/", http.StatusSeeOther)
+	
+}
+
+
+
+func (app *application) createQRCode(w http.ResponseWriter, r *http.Request) {
+
+
+	http.Redirect(w, r, "/", http.StatusSeeOther) 
+	
+}
+
+
 func (app *application) dashboard(w http.ResponseWriter, r *http.Request) {
 	data := app.newTemplateData(r)
 
