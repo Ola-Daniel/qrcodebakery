@@ -1,0 +1,22 @@
+{{define "page:title"}}Dashboard{{end}}
+
+{{define "page:main"}}
+<div class="dashboard-container">
+    <!-- List of Existing QR Codes -->
+    <h2>List of Existing QR Codes</h2>
+    <ul>
+        {{range .QRCodeList}}
+            <li>
+                QR Code ID: {{.ID}}, Data: {{.Data}}
+                <a href="/dashboard/edit?qrcode_id={{.ID}}">Edit</a>
+                <form action="/dashboard/delete" method="POST" style="display: inline;">
+                    <input type="hidden" name="qrcode_id" value="{{.ID}}">
+                    <button type="submit">Delete</button>
+                </form>
+            </li>
+        {{else}}
+            <li>No existing QR codes found.</li>
+        {{end}}
+    </ul>
+</div>
+{{end}}

@@ -1,0 +1,14 @@
+{{define "page:title"}}Dashboard{{end}}
+
+{{define "page:main"}}
+<div class="dashboard-container">
+    <!-- Generate QR Code Form -->
+    <div class="generate-qrcode-form">
+        <h2>Generate Dynamic QR Code</h2>
+        <form action="/dashboard/generate-qrcode" method="POST">
+            <input type="text" name="qr_data" placeholder="Enter data here....." required>
+            <button type="submit">Generate QR Code</button>
+        </form>
+    </div>
+</div>
+{{end}}
