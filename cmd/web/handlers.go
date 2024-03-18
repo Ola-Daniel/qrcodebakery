@@ -196,7 +196,12 @@ func (app *application) signout(w http.ResponseWriter, r *http.Request) {
 func (app *application) viewQRCodes(w http.ResponseWriter, r *http.Request) {
 
 
-	http.Redirect(w, r, "/", http.StatusSeeOther)
+	data := app.newTemplateData(r)
+
+	err := response.DashboardPage(w, http.StatusOK, data, "pages/get_all_user_code.tmpl")
+	if err != nil {
+		app.serverError(w, r, err)
+	} 
 	
 }
 
@@ -205,7 +210,12 @@ func (app *application) viewQRCodes(w http.ResponseWriter, r *http.Request) {
 func (app *application) createQRCode(w http.ResponseWriter, r *http.Request) {
 
 
-	http.Redirect(w, r, "/", http.StatusSeeOther) 
+	data := app.newTemplateData(r)
+
+	err := response.DashboardPage(w, http.StatusOK, data, "pages/create_dynamic_code.tmpl")
+	if err != nil {
+		app.serverError(w, r, err)
+	} 
 	
 }
 
