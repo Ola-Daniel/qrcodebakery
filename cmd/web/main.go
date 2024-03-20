@@ -16,17 +16,22 @@ import (
 
 	"github.com/gorilla/sessions"
 	"github.com/lmittmann/tint"
+	_ "github.com/joho/godotenv/autoload"
 )
 
 func main() {
-	logger := slog.New(tint.NewHandler(os.Stdout, &tint.Options{Level: slog.LevelDebug}))
 
+	
+	logger := slog.New(tint.NewHandler(os.Stdout, &tint.Options{Level: slog.LevelDebug}))
+      
 	err := run(logger)
 	if err != nil {
 		trace := string(debug.Stack())
 		logger.Error(err.Error(), "trace", trace)
 		os.Exit(1)
 	}
+	
+
 }
 
 type config struct {
@@ -69,6 +74,7 @@ type application struct {
 }
 
 func run(logger *slog.Logger) error {
+	
 	var cfg config
 
 	cfg.baseURL = env.GetString("BASE_URL", "http://localhost:5555")//
@@ -76,7 +82,7 @@ func run(logger *slog.Logger) error {
 	cfg.basicAuth.username = env.GetString("BASIC_AUTH_USERNAME", "admin")
 	cfg.basicAuth.hashedPassword = env.GetString("BASIC_AUTH_HASHED_PASSWORD", "$2a$10$jRb2qniNcoCyQM23T59RfeEQUbgdAXfR6S0scynmKfJa5Gj3arGJa")
 	cfg.cookie.secretKey = env.GetString("COOKIE_SECRET_KEY", "zt2eeito5ur2kqc7ylhzlbzn3lmqrwrw")
-	cfg.db.dsn = env.GetString("DB_DSN", "vopgmcku:b7hU-QUv5YG8M2p-8qizZX91Raj6VnH0@ruby.db.elephantsql.com/vopgmcku") //for dev postgres:password@localhost:5432/qrcodebakery?sslmode=disable
+	cfg.db.dsn = env.GetString("DB_DSN", "postgres:password@localhost:5432/qrcodebakery?sslmode=disable") //for dev postgres:password@localhost:5432/qrcodebakery?sslmode=disable  
 	cfg.db.automigrate = env.GetBool("DB_AUTOMIGRATE", true)
 	cfg.notifications.email = env.GetString("NOTIFICATIONS_EMAIL", "")
 	cfg.session.secretKey = env.GetString("SESSION_SECRET_KEY", "akauxvqnxvimnbo2ydpfnoeyjz73rn3w")
