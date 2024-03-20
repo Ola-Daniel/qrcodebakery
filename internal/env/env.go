@@ -3,7 +3,15 @@ package env
 import (
 	"os"
 	"strconv"
+	"github.com/joho/godotenv"
+	_ "github.com/joho/godotenv/autoload"
 )
+
+
+
+func LoadEnv() error {
+	return godotenv.Load(".env")
+}
 
 func GetString(key, defaultValue string) string {
 	value, exists := os.LookupEnv(key)
