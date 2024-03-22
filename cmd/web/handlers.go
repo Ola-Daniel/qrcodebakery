@@ -10,6 +10,7 @@ import (
 	"github.com/Ola-Daniel/qrcodebakery/internal/request"
 	"github.com/Ola-Daniel/qrcodebakery/internal/response"
 	"github.com/Ola-Daniel/qrcodebakery/internal/validator"
+	"github.com/Ola-Daniel/qrcodebakery/internal/cookies"
 	"github.com/google/uuid"
 	"github.com/yeqown/go-qrcode/v2"
 	"github.com/yeqown/go-qrcode/writer/standard"
@@ -106,6 +107,22 @@ func (app *application) login(w http.ResponseWriter, r *http.Request) {
 			return
 		}//
 
+		cookie := http.Cookie{
+			Name:     "isAuthenticated",
+			Value:    "yes",
+			Path:     "/",
+			MaxAge:   3600,
+			HttpOnly: true,
+			Secure:   true,
+			SameSite: http.SameSiteLaxMode,
+		}
+
+		err = cookies.WriteEncrypted(w, cookie, app.config.cookie.secretKey)
+        if err != nil {
+            app.serverError(w, r, err)
+            return
+        } 
+
 
 		//At this point, the user is successfully authenticated
 		//Redirect the user to the rpotected page or perform any other action
@@ -179,13 +196,17 @@ func (app *application) signup(w http.ResponseWriter, r *http.Request) {
 
 func (app *application) signout(w http.ResponseWriter, r *http.Request) {
 
-	//Clear Cookies to sign out!!!!!!!!!!
+	cookie := http.Cookie{
+		Name:     "isAuthenticated",
+		Value:    "",
+		Path:     "/",
+		MaxAge:   -1,
+		HttpOnly: true,
+		Secure:   true,
+		SameSite: http.SameSiteLaxMode,
+	}
 
-
-
-	//
-	//
-	//
+	http.SetCookie(w, &cookie) 
 
 	http.Redirect(w, r, "/", http.StatusSeeOther)
 	
@@ -194,11 +215,23 @@ func (app *application) signout(w http.ResponseWriter, r *http.Request) {
 
 
 func (app *application) viewQRCodes(w http.ResponseWriter, r *http.Request) {
-
+	value, err := cookies.ReadEncrypted(r, "isAuthenticated", app.config.cookie.secretKey)
+    if err != nil {
+        switch {
+        case errors.Is(err, http.ErrNoCookie):
+            app.badRequest(w, r, err)
+        case errors.Is(err, cookies.ErrInvalidValue):
+            app.badRequest(w, r, err)
+        default:
+            app.serverError(w, r, err)
+        }
+        return
+    }
+	fmt.Println(value)
 
 	data := app.newTemplateData(r)
 
-	err := response.DashboardPage(w, http.StatusOK, data, "pages/get_all_user_code.tmpl")
+	err = response.DashboardPage(w, http.StatusOK, data, "pages/get_all_user_code.tmpl")
 	if err != nil {
 		app.serverError(w, r, err)
 	} 
@@ -208,11 +241,23 @@ func (app *application) viewQRCodes(w http.ResponseWriter, r *http.Request) {
 
 
 func (app *application) createQRCode(w http.ResponseWriter, r *http.Request) {
-
+	value, err := cookies.ReadEncrypted(r, "isAuthenticated", app.config.cookie.secretKey)
+    if err != nil {
+        switch {
+        case errors.Is(err, http.ErrNoCookie):
+            app.badRequest(w, r, err)
+        case errors.Is(err, cookies.ErrInvalidValue):
+            app.badRequest(w, r, err)
+        default:
+            app.serverError(w, r, err)
+        }
+        return
+    }
+	fmt.Println(value)
 
 	data := app.newTemplateData(r)
 
-	err := response.DashboardPage(w, http.StatusOK, data, "pages/create_dynamic_code.tmpl")
+	err = response.DashboardPage(w, http.StatusOK, data, "pages/create_dynamic_code.tmpl")
 	if err != nil {
 		app.serverError(w, r, err)
 	} 
@@ -221,9 +266,24 @@ func (app *application) createQRCode(w http.ResponseWriter, r *http.Request) {
 
 
 func (app *application) dashboard(w http.ResponseWriter, r *http.Request) {
+
+	value, err := cookies.ReadEncrypted(r, "isAuthenticated", app.config.cookie.secretKey)
+    if err != nil {
+        switch {
+        case errors.Is(err, http.ErrNoCookie):
+            app.badRequest(w, r, err)
+        case errors.Is(err, cookies.ErrInvalidValue):
+            app.badRequest(w, r, err)
+        default:
+            app.serverError(w, r, err)
+        }
+        return
+    }
+	fmt.Println(value)
+
 	data := app.newTemplateData(r)
 
-	err := response.DashboardPage(w, http.StatusOK, data, "pages/dashboard.tmpl")
+	err = response.DashboardPage(w, http.StatusOK, data, "pages/dashboard.tmpl")
 	if err != nil {
 		app.serverError(w, r, err)
 	}
@@ -254,7 +314,7 @@ func (app *application) generate(w http.ResponseWriter, r *http.Request) {
 	}
 
 
-	
+	 
 
 	form.Validator.CheckField(form.DataString != "", "Data", "Input data cannot be empty")
 
@@ -337,9 +397,19 @@ func (app *application) generate(w http.ResponseWriter, r *http.Request) {
 	http.Redirect(w, r, "/", http.StatusSeeOther) 
 
 
-}
-
-
+} 
+/*
+func (app *application) requireAuthentication(next http.Handler) http.Handler {
+	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		cookie, err := r.Cookie("isAuthenticated")
+		if err != nil || cookie.Value != "yes" {
+			// If cookie is not present or has invalid value, redirect to login page
+			http.Redirect(w, r, "/login", http.StatusSeeOther)
+			return
+		}
+		next.ServeHTTP(w, r)
+	})
+} */
 
 
 func (app *application) protected(w http.ResponseWriter, r *http.Request) {
