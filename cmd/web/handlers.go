@@ -65,8 +65,9 @@ func (app *application) tos(w http.ResponseWriter, r *http.Request) {
 
 func (app *application) login(w http.ResponseWriter, r *http.Request) {
 	type loginForm struct {
-        UsernameOrEmail string `form:"Username"`
-        Password string `form:"Password"`
+        UsernameOrEmail string              `form:"Username"`
+        Password        string              `form:"Password"`
+		Validator       validator.Validator `form:"-"`
     }//  
 
 	switch r.Method {
@@ -133,9 +134,10 @@ func (app *application) login(w http.ResponseWriter, r *http.Request) {
 
 func (app *application) signup(w http.ResponseWriter, r *http.Request) {
 	type createUserForm struct {
-        Username string `form:"Username"`
-        Password string `form:"Password"`
-		Email    string `form:"Email"`
+        Username   string              `form:"Username"`
+        Password   string              `form:"Password"`
+		Email      string              `form:"Email"`
+		Validator  validator.Validator `form:"-"`
     }///  
 
 	switch r.Method {
@@ -155,6 +157,8 @@ func (app *application) signup(w http.ResponseWriter, r *http.Request) {
             app.badRequest(w, r, err)
             return
         }
+
+		
 
 		//Validate the username
 		if len(form.Username) < 8 {
