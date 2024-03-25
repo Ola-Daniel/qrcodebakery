@@ -22,6 +22,8 @@ var ImageFile string
 
 var ImageFileUploadPath string
 
+var DynamicImageFileUploadPath string
+
 func (app *application) home(w http.ResponseWriter, r *http.Request) {
 
 	data := app.newTemplateData(r)
@@ -259,7 +261,11 @@ func (app *application) createQRCode(w http.ResponseWriter, r *http.Request) {
     }
 	fmt.Println(value)
 
+	
+
 	data := app.newTemplateData(r)
+
+	data["DynamicQRCodeImagePath"] = DynamicImageFileUploadPath
 
 	err = response.DashboardPage(w, http.StatusOK, data, "pages/create_dynamic_code.tmpl")
 	if err != nil {
