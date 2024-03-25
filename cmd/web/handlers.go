@@ -281,13 +281,16 @@ func (app *application) dashboard(w http.ResponseWriter, r *http.Request) {
     if err != nil {
         switch {
         case errors.Is(err, http.ErrNoCookie):
-            app.badRequest(w, r, err)
+            http.Redirect(w, r, "/login", http.StatusSeeOther)
+			return
         case errors.Is(err, cookies.ErrInvalidValue):
-            app.badRequest(w, r, err)
+            http.Redirect(w, r, "/login", http.StatusSeeOther)
+			return
         default:
             app.serverError(w, r, err)
+			return
         }
-        return
+        
     }
 	fmt.Println(value)
 
