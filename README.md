@@ -20,6 +20,7 @@ QR codes have a wide range of applications, including but not limited to,
 - Displaying product information
 - Contactless payments
 - Tracking inventory
+- Resturant Menus
 - And much more!
 
  
