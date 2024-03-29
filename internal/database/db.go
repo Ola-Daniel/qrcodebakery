@@ -63,8 +63,6 @@ func New(dsn string, automigrate bool) (*DB, error) {
 
 
 
-
-
 // UserNotFoundError represents an error when a user is not found.
 type UserNotFoundError struct {
     UsernameOrEmail string
@@ -124,39 +122,51 @@ func (e *QRCodeNotFoundError) Error() string {
 var ErrQRCodeNotFound = &QRCodeNotFoundError{}
 
 type QRCode struct {
-	ID         int        `db:"id"`
+	QrcodeID   int        `db:"qrcode_id"`
 	UserID     int        `db:"user_id"`
-	Data       int        `db:"data"`
+	Data       string     `db:"data"`
+	ImagePath  string     `db:"image_path"`
 	CreatedAt  time.Time  `db:"created_at"`
 }
 
 
-func (db *DB) CreateQRCode(userID int, data string) error {
-	_, err := db.Exec("INSERT INTO qr_codes (user_id, data) VALUES ($1, $2)", userID, data)
-	return err
+func (db *DB) CreateQRCode(userID int, data, imagePath string) (int, error) {
+	var qrcodeID int
+	query := "INSERT INTO qr_codes (user_id, data, image_path) VALUES ($1, $2, $3) RETURNING qrcode_id"
+
+	err := db.QueryRow(query, userID, data, imagePath).Scan(&qrcodeID)
+
+	if err != nil {
+		return 0, err
+	}
+	return qrcodeID, nil 
 }
 
-func (db *DB) GetQRCodeByID(id int) (*QRCode, error) {
-	var qrCode QRCode
-	query := "SELECT id, user_id, data, created_at FROM qr_codes WHERE id = $1 LIMIT 1;"
-	err := db.QueryRow(query, id).Scan(&qrCode.ID, &qrCode.UserID, &qrCode.Data, &qrCode.CreatedAt)
+func (db *DB) GetQRCodeByID(qrcodeID int) (*QRCode, error) {
+	var qrcode QRCode
+	query := "SELECT * FROM qr_codes WHERE qrcode_id = $1" //LIMIT 1;
+	err := db.Get(&qrcode, query, qrcodeID)
+	//err := db.QueryRow(query, qrcodeID).Scan(&qrCode.ID, &qrCode.UserID, &qrCode.Data, &qrCode.ImagePath, &qrCode.CreatedAt)
 	if err != nil {
 		if err == sql.ErrNoRows {
 			return nil, ErrQRCodeNotFound
 		}
 		return nil, err
 	}
-	return &qrCode, nil
+	return &qrcode, nil
 }
 
 
-func (db *DB) UpdateQRCode(id int, data string) error {
-	_, err := db.Exec("UPDATE qr_codes SET data = $1 WHERE id = $2", data, id)
+func (db *DB) UpdateQRCode(qrcodeID int, data, imagePath string) error {
+
+	query := "UPDATE qr_codes SET data = $1, image_path = $2 WHERE qrcode_id = $3"
+	_, err := db.Exec(query, data, imagePath, qrcodeID)
 	return err
 }
 
-func (db *DB) DeleteQRCode(id int) error {
-	_, err := db.Exec("DELETE FROM qr_codes WHERE id = $1", id)
+func (db *DB) DeleteQRCode(qrcodeID int) error {
+	query := "DELETE FROM qr_codes WHERE qrcode_id = $1"
+	_, err := db.Exec(query, qrcodeID)
 	return err
 }
 
