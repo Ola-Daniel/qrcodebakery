@@ -107,3 +107,58 @@ func (db *DB) GetUser(usernameOrEmail string) (*User, error) {
     }
     return &user, nil
 }
+
+// represents an error when a QR code is not found
+type QRCodeNotFoundError struct {
+	ID int
+}
+
+
+// Error returns the error message
+
+func (e *QRCodeNotFoundError) Error() string {
+	return "QR code not found with ID: " + fmt.Sprint(e.ID)
+}
+
+
+var ErrQRCodeNotFound = &QRCodeNotFoundError{}
+
+type QRCode struct {
+	ID         int        `db:"id"`
+	UserID     int        `db:"user_id"`
+	Data       int        `db:"data"`
+	CreatedAt  time.Time  `db:"created_at"`
+}
+
+
+func (db *DB) CreateQRCode(userID int, data string) error {
+	_, err := db.Exec("INSERT INTO qr_codes (user_id, data) VALUES ($1, $2)", userID, data)
+	return err
+}
+
+func (db *DB) GetQRCodeByID(id int) (*QRCode, error) {
+	var qrCode QRCode
+	query := "SELECT id, user_id, data, created_at FROM qr_codes WHERE id = $1 LIMIT 1;"
+	err := db.QueryRow(query, id).Scan(&qrCode.ID, &qrCode.UserID, &qrCode.Data, &qrCode.CreatedAt)
+	if err != nil {
+		if err == sql.ErrNoRows {
+			return nil, ErrQRCodeNotFound
+		}
+		return nil, err
+	}
+	return &qrCode, nil
+}
+
+
+func (db *DB) UpdateQRCode(id int, data string) error {
+	_, err := db.Exec("UPDATE qr_codes SET data = $1 WHERE id = $2", data, id)
+	return err
+}
+
+func (db *DB) DeleteQRCode(id int) error {
+	_, err := db.Exec("DELETE FROM qr_codes WHERE id = $1", id)
+	return err
+}
+
+
+
