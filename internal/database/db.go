@@ -172,3 +172,14 @@ func (db *DB) DeleteQRCode(qrcodeID int) error {
 
 
 
+func (db *DB) GetAllQRCodesByUserID(userID int) ([]QRCode, error) {
+	var qrcodes []QRCode
+	query := "SELECT * FROM qr_codes WHERE user_id = $1"
+	err := db.Select(&qrcodes, query, userID)
+	if err != nil {
+		return nil, err
+	}
+	return qrcodes, nil
+}
+
+
