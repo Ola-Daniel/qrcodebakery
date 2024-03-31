@@ -351,7 +351,7 @@ func (app *application) createQRCode(w http.ResponseWriter, r *http.Request) {
 	case http.MethodGet:
 		data := app.newTemplateData(r)
 
-		data["DynamicQRCodeImagePath"] = DynamicImageFileUploadPath
+		data["DynamicQRCodeImagePath"] = "../../" + DynamicImageFileUploadPath 
 
 		err = response.DashboardPage(w, http.StatusOK, data, "pages/create_dynamic_code.tmpl")
 		if err != nil {
