@@ -255,7 +255,38 @@ func (app *application) viewQRCodes(w http.ResponseWriter, r *http.Request) {
 	}
 	fmt.Println(value)
 
+
+	value, err = cookies.ReadEncrypted(r, "userid", app.config.cookie.secretKey)
+	if err != nil {
+		switch {
+		case errors.Is(err, http.ErrNoCookie):
+			app.badRequest(w, r, err)
+		case errors.Is(err, cookies.ErrInvalidValue):
+			app.badRequest(w, r, err)
+		default:
+			app.serverError(w, r, err)
+		}
+		return
+	    }
+	
+
+	userid, err := strconv.Atoi(value)
+	if err != nil { 
+		app.badRequest(w, r, err)   
+	}
+
+	qrcodes, err := app.db.GetAllQRCodesByUserID(userid) 
+	if err != nil {
+		app.badRequest(w, r, err)
+	}
+
+	fmt.Println(qrcodes)
+
+	
+
 	data := app.newTemplateData(r)
+
+	data["QRCodeList"] = qrcodes
 
 	err = response.DashboardPage(w, http.StatusOK, data, "pages/get_all_user_code.tmpl")
 	if err != nil {
@@ -295,6 +326,26 @@ func (app *application) createQRCode(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	fmt.Println(value)
+
+
+	value, err = cookies.ReadEncrypted(r, "userid", app.config.cookie.secretKey)
+	if err != nil {
+		switch {
+		case errors.Is(err, http.ErrNoCookie):
+			app.badRequest(w, r, err)
+		case errors.Is(err, cookies.ErrInvalidValue):
+			app.badRequest(w, r, err)
+		default:
+			app.serverError(w, r, err)
+		}
+		return
+	    }
+	
+
+	userid, err := strconv.Atoi(value)
+	if err != nil { 
+		app.badRequest(w, r, err)   
+	}
 
 	switch r.Method {
 	case http.MethodGet:
@@ -380,24 +431,7 @@ func (app *application) createQRCode(w http.ResponseWriter, r *http.Request) {
 		}
 
 
-		value, err := cookies.ReadEncrypted(r, "userid", app.config.cookie.secretKey)
-	    if err != nil {
-		switch {
-		case errors.Is(err, http.ErrNoCookie):
-			app.badRequest(w, r, err)
-		case errors.Is(err, cookies.ErrInvalidValue):
-			app.badRequest(w, r, err)
-		default:
-			app.serverError(w, r, err)
-		}
-		return
-	    }
-	
-
-		userid, err := strconv.Atoi(value)
-		if err != nil { 
-			app.badRequest(w, r, err)   
-		}
+		
 
 		_, err = app.db.CreateQRCode(userid, form.DataString, DynamicImageFileUploadPath)
 		if err != nil {
@@ -406,7 +440,7 @@ func (app *application) createQRCode(w http.ResponseWriter, r *http.Request) {
 		}
 
 		// Redirect back to homepage after successful generation
-		http.Redirect(w, r, "/dashboard/view-qr-codes", http.StatusSeeOther)
+		http.Redirect(w, r, "/dashboard/create-qr-code", http.StatusSeeOther) 
  
 	}
 
