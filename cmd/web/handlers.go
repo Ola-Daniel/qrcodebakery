@@ -7,6 +7,7 @@ import (
 	"net/url"
 	"regexp"
 	"strconv"
+	"time"
 
 	"github.com/Ola-Daniel/qrcodebakery/internal/cookies"
 	"github.com/Ola-Daniel/qrcodebakery/internal/request"
@@ -275,12 +276,32 @@ func (app *application) viewQRCodes(w http.ResponseWriter, r *http.Request) {
 		app.badRequest(w, r, err)   
 	}
 
+
+	type QRCode struct {
+		QrcodeID  int
+		UserID    int
+		Data      string
+		ImagePath string
+		CreatedAt time.Time
+	}
+
+
+
+
+
+
+
 	qrcodes, err := app.db.GetAllQRCodesByUserID(userid) 
 	if err != nil {
 		app.badRequest(w, r, err)
 	}
 
 	fmt.Println(qrcodes)
+
+	for _, code := range qrcodes {
+        fmt.Printf("QR Code ID: %d, User ID: %d, Data: %s, Image Path: %s, Created At: %s\n",
+            code.QrcodeID, code.UserID, code.Data, code.ImagePath, code.CreatedAt)
+    }
 
 	
 
