@@ -7,10 +7,10 @@
     <ul>
         {{range .QRCodeList}}
             <li>
-                QR Code ID: {{.ID}}, Data: {{.Data}}
-                <a href="/dashboard/edit?qrcode_id={{.ID}}">Edit</a>
+                QR Code ID: {{.QrcodeID}}, Data: {{.Data}}
+                <a href="/dashboard/edit?qrcode_id={{.QrcodeID}}">Edit</a>
                 <form action="/dashboard/delete" method="POST" style="display: inline;">
-                    <input type="hidden" name="qrcode_id" value="{{.ID}}">
+                    <input type="hidden" name="qrcode_id" value="{{.QrcodeID}}">
                     <button type="submit">Delete</button>
                 </form>
             </li>
