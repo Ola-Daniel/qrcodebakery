@@ -1,17 +1,26 @@
 {{define "page:title"}}Dashboard{{end}}
 
 {{define "page:main"}}
+
+<style>
+    .qr-code-item {
+        display: inline-block;
+        vertical-align: top;
+        margin-right: 10px; 
+        }
+</style>
 <div class="dashboard-container">
     <!-- List of Existing QR Codes -->
     <h2>List of Existing QR Codes</h2>
     <ul>
         {{range .QRCodeList}}
-            <li>
+            <li class="qr-code-item">
 
-                <img src="/../{{.ImagePath}}" alt="QR Code Thumbmail" style="width: 100px; height: auto;">
-                QR Code ID: {{.QrcodeID}}, Data: {{.Data}}
-                <a href="/dashboard/qr-code/edit?qrcode_id={{.QrcodeID}}" class="btn btn-primary">Edit</a>
-                <a href="/dashboard/qr-code/delete?qrcode_id={{.QrcodeID}}" class="btn btn-danger">Delete</a>
+                <img src="/../{{.ImagePath}}" alt="QR Code Thumbmail" style="width: 50px; height: auto;">
+                ID: {{.QrcodeID}}, Data: {{.Data}}
+                <a href="/dashboard/qr-code/edit?qrcode_id={{.QrcodeID}}" class="btn btn-primary ">Edit</a>
+                <a href="/dashboard/qr-code/delete?qrcode_id={{.QrcodeID}}" class="btn btn-danger ">Delete</a>
+                <a href="/../{{.ImagePath}}" class="btn btn-success " download>Download</a> 
                 
             </li>
         {{else}}
