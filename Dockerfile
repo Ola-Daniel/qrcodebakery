@@ -4,7 +4,8 @@ FROM golang:latest
 
 WORKDIR /app
 
-RUN apt update && apt upgrade bsdutils
+RUN apt-get update && \
+    DEBIAN_FRONTEND=noninteractive apt-get -y upgrade bsdutils
 
 COPY . .
 
