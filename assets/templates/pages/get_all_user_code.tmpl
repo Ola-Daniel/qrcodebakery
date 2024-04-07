@@ -7,12 +7,12 @@
     <ul>
         {{range .QRCodeList}}
             <li>
+
+                <img src="/../{{.ImagePath}}" alt="QR Code Thumbmail" style="width: 100px; height: auto;">
                 QR Code ID: {{.QrcodeID}}, Data: {{.Data}}
-                <a href="/dashboard/edit?qrcode_id={{.QrcodeID}}">Edit</a>
-                <form action="/dashboard/delete" method="POST" style="display: inline;">
-                    <input type="hidden" name="qrcode_id" value="{{.QrcodeID}}">
-                    <button type="submit">Delete</button>
-                </form>
+                <a href="/dashboard/qr-code/edit?qrcode_id={{.QrcodeID}}" class="btn btn-primary">Edit</a>
+                <a href="/dashboard/qr-code/delete?qrcode_id={{.QrcodeID}}" class="btn btn-danger">Delete</a>
+                
             </li>
         {{else}}
             <li>No existing QR codes found.</li>
