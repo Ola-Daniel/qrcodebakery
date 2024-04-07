@@ -46,11 +46,13 @@ func (app *application) routes() http.Handler {
 
     mux.HandleFunc("/dashboard/signout", app.signout).Methods("GET")
 
-	mux.HandleFunc("/dashboard/view-qr-codes", app.viewQRCodes).Methods("GET", "POST")
+	mux.HandleFunc("/dashboard/qr-code/view", app.viewQRCodes).Methods("GET", "POST")
 
-	mux.HandleFunc("/dashboard/delete-qr-code", app.deleteQRCode).Methods("POST")
+	mux.HandleFunc("/dashboard/qr-code/delete", app.deleteQRCode).Methods("POST")
 
-	mux.HandleFunc("/dashboard/create-qr-code", app.createQRCode).Methods("GET", "POST")
+	mux.HandleFunc("/dashboard/qr-code/create", app.createQRCode).Methods("GET", "POST")
+
+	mux.HandleFunc("/dashboard/qr-code/edit", app.editQRCode).Methods("GET", "POST")
 
 
 
