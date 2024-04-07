@@ -461,7 +461,7 @@ func (app *application) createQRCode(w http.ResponseWriter, r *http.Request) {
 		}
 
 		// Redirect back to homepage after successful generation
-		http.Redirect(w, r, "/dashboard/create-qr-code", http.StatusSeeOther) 
+		http.Redirect(w, r, "/dashboard/qr-code/create", http.StatusSeeOther) 
  
 	}
 
