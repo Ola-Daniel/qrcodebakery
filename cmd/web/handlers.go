@@ -96,6 +96,7 @@ func (app *application) login(w http.ResponseWriter, r *http.Request) {
 		if err != nil {
 			//Handle the error (e.g., user not found)//
 			app.invalidCredentials(w, r, err)
+			//http.Redirect(w, r, "/login", http.StatusSeeOther)
 			return
 		}
 

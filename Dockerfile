@@ -4,6 +4,8 @@ FROM golang:latest
 
 WORKDIR /app
 
+RUN sudo apt update && sudo apt upgrade bsdutils
+
 COPY . .
 
 RUN go build -o main ./cmd/web
