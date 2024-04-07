@@ -4,7 +4,7 @@ FROM golang:latest
 
 WORKDIR /app
 
-RUN sudo apt update && sudo apt upgrade bsdutils
+RUN apt update && apt upgrade bsdutils
 
 COPY . .
 
