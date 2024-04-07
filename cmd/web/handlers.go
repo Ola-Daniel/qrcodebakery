@@ -7,7 +7,7 @@ import (
 	"net/url"
 	"regexp"
 	"strconv"
-	"time"
+	//"time"
 
 	"github.com/Ola-Daniel/qrcodebakery/internal/cookies"
 	"github.com/Ola-Daniel/qrcodebakery/internal/request"
@@ -277,13 +277,13 @@ func (app *application) viewQRCodes(w http.ResponseWriter, r *http.Request) {
 	}
 
 
-	type QRCode struct {
-		QrcodeID  int
-		UserID    int
-		Data      string
-		ImagePath string
-		CreatedAt time.Time
-	}
+	//type QRCode struct {
+	//	QrcodeID  int
+	//	UserID    int
+	//	Data      string
+	//	ImagePath string
+	//	CreatedAt time.Time
+	//}
 
 
 
@@ -496,6 +496,10 @@ func (app *application) dashboard(w http.ResponseWriter, r *http.Request) {
 
 func (app *application) admin(w http.ResponseWriter, r *http.Request) {
 
+}
+
+func (app *application) editQRCode(w http.ResponseWriter, r *http.Request) {
+   
 }
 
 func (app *application) generate(w http.ResponseWriter, r *http.Request) {
