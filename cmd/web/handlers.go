@@ -310,7 +310,7 @@ func (app *application) viewQRCodes(w http.ResponseWriter, r *http.Request) {
 
 	data["QRCodeList"] = qrcodes
 
-	err = response.DashboardPage(w, http.StatusOK, data, "pages/get_all_user_code.tmpl")
+	err = response.DashboardPage(w, http.StatusOK, data, "pages/view.tmpl")
 	if err != nil {
 		app.serverError(w, r, err)
 	}
@@ -331,7 +331,7 @@ func (app *application) deleteQRCode(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	fmt.Println(value)
-
+    http.Redirect(w, r, "/dashboard/qr-code/view", http.StatusSeeOther)
 }
 
 func (app *application) createQRCode(w http.ResponseWriter, r *http.Request) {
@@ -375,7 +375,7 @@ func (app *application) createQRCode(w http.ResponseWriter, r *http.Request) {
 
 		data["DynamicQRCodeImagePath"] = "../../" + DynamicImageFileUploadPath 
 
-		err = response.DashboardPage(w, http.StatusOK, data, "pages/create_dynamic_code.tmpl")
+		err = response.DashboardPage(w, http.StatusOK, data, "pages/create.tmpl")
 		if err != nil {
 			app.serverError(w, r, err)
 		}
