@@ -18,7 +18,7 @@ require (
 	github.com/yeqown/go-qrcode/writer/standard v1.2.2
 	golang.org/x/crypto v0.20.0
 	golang.org/x/exp v0.0.0-20240222234643-814bf88cf225
-	golang.org/x/text v0.14.0
+	golang.org/x/text v0.16.0
 )
 
 require (
@@ -30,5 +30,5 @@ require (
 	github.com/pkg/errors v0.9.1 // indirect
 	github.com/yeqown/reedsolomon v1.0.0 // indirect
 	go.uber.org/atomic v1.7.0 // indirect
-	golang.org/x/image v0.10.0 // indirect
+	golang.org/x/image v0.18.0 // indirect
 )
