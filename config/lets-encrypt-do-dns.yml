@@ -1,7 +1,7 @@
-apiVersion: v1
-kind: Secret
-metadata:
-  namespace: cert-manager
-  name: lets-encrypt-do-dns
-data:
-  access-token: <access token base64 encoded>
+#apiVersion: v1
+#kind: Secret
+#metadata:
+#  namespace: cert-manager
+#  name: lets-encrypt-do-dns
+#data:
+#  access-token: <access token base64 encoded>
