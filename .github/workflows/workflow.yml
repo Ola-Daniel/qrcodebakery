@@ -55,8 +55,7 @@ jobs:
     needs: [build]
     if: ${{ needs.build.result == 'success' }}
     name: 'Deploy'
-    runs-on: 'ubuntu-latest'
-    environment: 'production'
+    #environment: 'production'
 
     permissions:
       contents: 'read'
