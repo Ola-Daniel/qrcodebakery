@@ -120,6 +120,11 @@ jobs:
     - name: Update deployment file
       run: TAG=$(echo $GITHUB_SHA | head -c7) && sed -i 's|<IMAGE>|${GAR_LOCATION}-docker.pkg.dev/${PROJECT_ID}/${REPOSITORY}/${IMAGE}:'${TAG}'|' $GITHUB_WORKSPACE/config/deployment.yml
 
+    - name: 'Set up Cloud SDK'
+      uses: 'google-github-actions/setup-gcloud@v2'
+      #with:
+        #version: '>= 363.0.0'
+
     - name: configure iap
       run: gcloud compute ssh gke-iap-proxy --zone ${{ secrets.CLUSTER_ZONE }} --project ${{ secrets.GKE_PROJECT_ID }} -- -L 8888:localhost:8888 -N -q -f
 
