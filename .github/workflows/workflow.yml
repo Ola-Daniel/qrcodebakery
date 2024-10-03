@@ -125,7 +125,7 @@ jobs:
       #with:
         #version: '>= 363.0.0'
 
-    - name: configure iap
+    - name: configure IAP
       run: gcloud compute ssh gke-iap-proxy --zone ${{ secrets.CLUSTER_ZONE }} --project ${{ secrets.GKE_PROJECT_ID }} -- -L 8888:localhost:8888 -N -q -f
 
     - name: Deploy to GKE
