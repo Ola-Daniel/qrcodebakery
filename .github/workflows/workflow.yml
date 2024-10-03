@@ -118,7 +118,7 @@ jobs:
         docker push "${DOCKER_TAG}" 
 
     - name: Update deployment file
-      run: TAG=$(echo $GITHUB_SHA | head -c7) && sed -i 's|<IMAGE>|${{ secrets.GAR_LOCATION }}-docker.pkg.dev/${{ secrets.PROJECT_ID }}/${{ secrets.REPOSITORY }}/qrcodebakery:'${TAG}'|' $GITHUB_WORKSPACE/config/deployment.yml
+      run: TAG=$(echo $GITHUB_SHA | head -c7) && sed -i 's|<IMAGE>|$GAR_LOCATION-docker.pkg.dev/$PROJECT_ID/$REPOSITORY/qrcodebakery:'${TAG}'|' $GITHUB_WORKSPACE/config/deployment.yml
 
     - name: 'Set up Cloud SDK'
       uses: 'google-github-actions/setup-gcloud@v2'
