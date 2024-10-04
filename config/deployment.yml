@@ -26,9 +26,9 @@ spec:
         - containerPort: 5555
         resources:
           requests:
-            cpu: 210m
+            cpu: 500m
           limits:
-            cpu: 210m
+            cpu: 500m
 ---
 apiVersion: v1
 kind: Service
