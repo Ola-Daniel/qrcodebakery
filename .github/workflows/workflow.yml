@@ -103,6 +103,7 @@ jobs:
 
         docker build \
           --tag "${DOCKER_TAG}" \
+          --tag "latest" \
           --build-arg GITHUB_SHA="${GITHUB_SHA}" \
           --build-arg GITHUB_REF="${GITHUB_REF}" \
           . 
@@ -110,7 +111,7 @@ jobs:
     - name: 'Run Trivy Scan'
       uses: aquasecurity/trivy-action@master
       with:
-        image-ref: "northamerica-northeast1-docker.pkg.dev/${{ secrets.GKE_PROJECT_ID }}/danieloo/qrcodebakery:${GITHUB_SHA}"
+        image-ref: 'northamerica-northeast1-docker.pkg.dev/${{ secrets.GKE_PROJECT_ID }}/danieloo/qrcodebakery:latest'
         format: 'table'
         exit-code: '1'
         ignore-unfixed: true
