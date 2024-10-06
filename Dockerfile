@@ -5,6 +5,7 @@ WORKDIR /build
 RUN apt-get update && \
     DEBIAN_FRONTEND=noninteractive apt-get -y upgrade bsdutils
 COPY go.mod go.sum ./
+RUN go mod tidy
 RUN go mod download && go mod verify
 COPY . .
 WORKDIR /build/cmd/web
@@ -15,6 +16,7 @@ FROM alpine:latest
 RUN lld; exit 0
 WORKDIR /app
 COPY --from=builder /build/cmd/web/qrcodebakery .
+COPY --from=builder /build/.env .
 EXPOSE 5555
 #USER nonroot:nonroot
 ENTRYPOINT ["/app/qrcodebakery"]
