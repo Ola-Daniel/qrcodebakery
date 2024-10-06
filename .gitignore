@@ -7,3 +7,5 @@ build-errors.log
 files/generated
 files/uploads
 *.txt
+*.log
+*backup
