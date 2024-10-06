@@ -108,15 +108,15 @@ jobs:
           . 
 
     - name: 'Run Trivy Scan'
-       uses: aquasecurity/trivy-action@master
-       with:
-         image-ref: northamerica-northeast1-docker.pkg.dev/${{ secrets.GKE_PROJECT_ID }}/danieloo/qrcodebakery:'${TAG}' 
-         format: 'table'
-         exit-code: '1'
-         ignore-unfixed: true
-         vuln-type: 'os,library'
-         severity: 'CRITICAL,HIGH'
-         scanners: 'vuln'
+      uses: aquasecurity/trivy-action@master
+      with:
+        image-ref: northamerica-northeast1-docker.pkg.dev/${{ secrets.GKE_PROJECT_ID }}/danieloo/qrcodebakery:'${TAG}' 
+        format: 'table'
+        exit-code: '1'
+        ignore-unfixed: true
+        vuln-type: 'os,library'
+        severity: 'CRITICAL,HIGH'
+        scanners: 'vuln'
 
     - name: 'Push Docker container'
        run: |-
