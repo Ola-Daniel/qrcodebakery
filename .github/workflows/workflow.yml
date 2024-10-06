@@ -121,7 +121,9 @@ jobs:
 
     - name: 'Push Docker container'
       run: |-
-            docker push "${DOCKER_TAG}"
+        DOCKER_TAG="${GAR_LOCATION}-docker.pkg.dev/${PROJECT_ID}/${REPOSITORY}/${IMAGE}:${GITHUB_SHA}"
+            
+        docker push "${DOCKER_TAG}"
 
     - name: 'Update deployment file'
       run: TAG=$(echo $GITHUB_SHA) && sed -i 's|<IMAGE>|northamerica-northeast1-docker.pkg.dev/${{ secrets.GKE_PROJECT_ID }}/danieloo/qrcodebakery:'${TAG}'|' $GITHUB_WORKSPACE/config/deployment.yml
