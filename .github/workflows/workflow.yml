@@ -110,7 +110,7 @@ jobs:
     - name: 'Run Trivy Scan'
       uses: aquasecurity/trivy-action@master
       with:
-        image-ref: northamerica-northeast1-docker.pkg.dev/${{ secrets.GKE_PROJECT_ID }}/danieloo/qrcodebakery:${GITHUB_REF}
+        image-ref: "northamerica-northeast1-docker.pkg.dev/${{ secrets.GKE_PROJECT_ID }}/danieloo/qrcodebakery:${GITHUB_SHA}"
         format: 'table'
         exit-code: '1'
         ignore-unfixed: true
