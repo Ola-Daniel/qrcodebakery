@@ -119,7 +119,7 @@ jobs:
         scanners: 'vuln'
 
     - name: 'Push Docker container'
-       run: |-
+      run: |-
             docker push "${DOCKER_TAG}"
 
     - name: 'Update deployment file'
