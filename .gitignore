@@ -6,3 +6,4 @@ build-errors.log
 *env
 files/generated
 files/uploads
+*.txt
