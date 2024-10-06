@@ -1,7 +1,7 @@
 package main
 
 import (
-	"fmt"
+	//"fmt"
 	"net/http"
 
 	"github.com/Ola-Daniel/qrcodebakery/internal/version"
@@ -22,7 +22,7 @@ func (app *application) newEmailData() map[string]any {
 
 	return data
 }
-
+/*
 func (app *application) backgroundTask(r *http.Request, fn func() error) {
 	app.wg.Add(1)
 
@@ -41,4 +41,4 @@ func (app *application) backgroundTask(r *http.Request, fn func() error) {
 			app.reportServerError(r, err)
 		}
 	}()
-} 
+} */
