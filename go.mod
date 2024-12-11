@@ -16,9 +16,9 @@ require (
 	github.com/wneessen/go-mail v0.4.1
 	github.com/yeqown/go-qrcode/v2 v2.2.2
 	github.com/yeqown/go-qrcode/writer/standard v1.2.2
-	golang.org/x/crypto v0.20.0
+	golang.org/x/crypto v0.31.0
 	golang.org/x/exp v0.0.0-20240222234643-814bf88cf225
-	golang.org/x/text v0.16.0
+	golang.org/x/text v0.21.0
 )
 
 require (
